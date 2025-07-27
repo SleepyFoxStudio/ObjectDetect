@@ -46,6 +46,9 @@ class Notifier:
             # Output the result
             print("Status:", response.status_code)
             print("Response:", response.text)
+        else:
+            print("hass_url NOT SET:!!", os.environ['hass_url'])
+            
 
 
         return
