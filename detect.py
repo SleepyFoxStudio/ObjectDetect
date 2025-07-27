@@ -190,9 +190,9 @@ def main():
                 fps = frame_count / elapsed
                 print(f"FPS: {fps:.2f}")
             
-            # Maintain target FPS
-            processing_time = time.time() - loop_start
-            delay = max(1, int((frame_time - processing_time) * 1000))
+        # Maintain target FPS
+        processing_time = time.time() - loop_start
+        delay = max(1, int((frame_time - processing_time) * 1000))
         
         if cv2.waitKey(delay) & 0xFF == ord('q'):
             break
