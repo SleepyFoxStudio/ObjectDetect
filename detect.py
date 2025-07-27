@@ -5,14 +5,15 @@ import numpy as np
 from collections import defaultdict
 import time
 import subprocess
-
+import os
 class Notifier:
     def __init__(self):
         pass
 
     def speak(self, text):
-        #return
-        subprocess.run(['say', text])
+        print (text)
+        return
+        #subprocess.run(['say', text])
 
 class VehicleTracker:
     def __init__(self, confidence_threshold=0.4, max_disappeared=30*10):
@@ -151,7 +152,9 @@ def main():
     tracker = VehicleTracker()
     
     # Access RTSP stream
-    cap = cv2.VideoCapture('rtsp://admin:psc9epuBVGuGn3URzSJV@192.168.175.11:554/cam/realmonitor?channel=1&subtype=1')
+    
+    rstp_stream = os.environ['RSTP_STREAM']
+    cap = cv2.VideoCapture(rstp_stream)
     
     # Set buffer size
     cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
