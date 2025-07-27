@@ -6,12 +6,47 @@ from collections import defaultdict
 import time
 import subprocess
 import os
+import requests
+import datetime
+
+
+
+
+
 class Notifier:
     def __init__(self):
         pass
 
     def speak(self, text):
         print (text)
+        hass_url = os.environ.get('HASS_URL')
+        if not hass_url:
+
+            # Your Home Assistant long-lived token
+            token = os.environ['HASS_TOKEN']
+
+            # Set up the authorization header
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+            }
+
+            # Custom event name and data
+            event_type = "car_arrived"
+            event_data = {
+                "car": "UNKNOWN",
+                "license_plate": "UNKNOWN",
+                "arrived_at": datetime.datetime.now().isoformat()
+            }
+
+            # Send the event to Home Assistant
+            response = requests.post(f"{hass_url}/api/events/{event_type}", headers=headers, json=event_data)
+
+            # Output the result
+            print("Status:", response.status_code)
+            print("Response:", response.text)
+
+
         return
         #subprocess.run(['say', text])
 
