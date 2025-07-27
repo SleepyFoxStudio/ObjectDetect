@@ -176,20 +176,23 @@ def main():
         
         # Process frame
         processed_frame = tracker.process_frame(frame)
+
+        headless = os.environ.get('HEADLESS')
+        if not headless:
         
-        # Display the output
-        cv2.imshow('Vehicle Detection', processed_frame)
-        
-        # Calculate and display FPS
-        frame_count += 1
-        if frame_count % 30 == 0:
-            elapsed = time.time() - start_time
-            fps = frame_count / elapsed
-            print(f"FPS: {fps:.2f}")
-        
-        # Maintain target FPS
-        processing_time = time.time() - loop_start
-        delay = max(1, int((frame_time - processing_time) * 1000))
+            # Display the output
+            cv2.imshow('Vehicle Detection', processed_frame)
+            
+            # Calculate and display FPS
+            frame_count += 1
+            if frame_count % 30 == 0:
+                elapsed = time.time() - start_time
+                fps = frame_count / elapsed
+                print(f"FPS: {fps:.2f}")
+            
+            # Maintain target FPS
+            processing_time = time.time() - loop_start
+            delay = max(1, int((frame_time - processing_time) * 1000))
         
         if cv2.waitKey(delay) & 0xFF == ord('q'):
             break
