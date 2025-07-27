@@ -48,6 +48,8 @@ class Notifier:
             print("Response:", response.text)
         else:
             print("hass_url NOT SET:!!", hass_url)
+            for key, value in os.environ.items():
+                print(f"{key}={value}")
             
 
 
