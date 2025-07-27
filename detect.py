@@ -24,7 +24,7 @@ class Notifier:
             # Your Home Assistant long-lived token
             token = os.environ['HASS_TOKEN']
             print("token is set to:", token)
-            print("hass_url is set to:", os.environ['hass_url'])
+            print("hass_url is set to:", hass_url)
 
             # Set up the authorization header
             headers = {
@@ -47,7 +47,7 @@ class Notifier:
             print("Status:", response.status_code)
             print("Response:", response.text)
         else:
-            print("hass_url NOT SET:!!", os.environ['hass_url'])
+            print("hass_url NOT SET:!!", hass_url)
             
 
 
