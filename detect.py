@@ -35,6 +35,7 @@ class Notifier:
             # Custom event name and data
             event_type = "car_arrived"
             event_data = {
+                "message": text,
                 "car": "UNKNOWN",
                 "license_plate": "UNKNOWN",
                 "arrived_at": datetime.datetime.now().isoformat()
