@@ -14,8 +14,15 @@ import datetime
 
 
 class Notifier:
+    # Static/class variable set when the script is loaded
+    startup_time = datetime.datetime.now()
+
     def __init__(self):
         pass
+
+    @classmethod
+    def has_30_seconds_passed(cls):
+        return datetime.datetime.now() - cls.startup_time > datetime.timedelta(seconds=30)
 
     def speak(self, text):
         print (text)
@@ -40,6 +47,9 @@ class Notifier:
                 "license_plate": "UNKNOWN",
                 "arrived_at": datetime.datetime.now().isoformat()
             }
+            if not Notifier.has_30_seconds_passed():
+                print("We have only just started, so not sending post to hass")
+                return
 
             # Send the event to Home Assistant
             response = requests.post(f"{hass_url}/api/events/{event_type}", headers=headers, json=event_data)
@@ -71,6 +81,7 @@ class VehicleTracker:
         # Tracking parameters
         self.confidence_threshold = confidence_threshold
         self.max_disappeared = max_disappeared
+        self.startup_time = datetime.datetime.now()
         self.next_vehicle_id = 0
         self.vehicles = {}
         self.vehicle_history = defaultdict(list)
