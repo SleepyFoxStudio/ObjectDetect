@@ -236,12 +236,12 @@ def main():
             # Display the output
             cv2.imshow('Vehicle Detection', processed_frame)
             
-            # Calculate and display FPS
-            frame_count += 1
-            if frame_count % 30 == 0:
-                elapsed = time.time() - start_time
-                fps = frame_count / elapsed
-                print(f"FPS: {fps:.2f}")
+        # Calculate and display FPS
+        frame_count += 1
+        if frame_count % 30 == 0:
+            elapsed = time.time() - start_time
+            fps = frame_count / elapsed
+            print(f"FPS: {fps:.2f}")
             
         # Maintain target FPS
         processing_time = time.time() - loop_start
