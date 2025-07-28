@@ -19,12 +19,12 @@ class Notifier:
 
     def speak(self, text):
         print (text)
-        hass_url = os.environ.get('HASS_URL')
+        hass_url = os.environ.get('HASS_URL', '').rstrip('/')
         if hass_url:
             # Your Home Assistant long-lived token
             token = os.environ['HASS_TOKEN']
-            print("token is set to:", token)
-            print("hass_url is set to:", hass_url)
+            #print("token is set to:", token)
+            #print("hass_url is set to:", hass_url)
 
             # Set up the authorization header
             headers = {
@@ -49,8 +49,8 @@ class Notifier:
             print("Response:", response.text)
         else:
             print("hass_url NOT SET:!!", hass_url)
-            for key, value in os.environ.items():
-                print(f"{key}={value}")
+            # for key, value in os.environ.items():
+            #     print(f"{key}={value}")
             
 
 
