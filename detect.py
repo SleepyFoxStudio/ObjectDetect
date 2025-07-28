@@ -113,7 +113,7 @@ class VehicleTracker:
                 # Add status text
                 status = self.get_vehicle_status(vehicle_id)
                 cv2.putText(frame, f"ID: {vehicle_id} ({status})", 
-                          (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 
+                          (x, y + h +15), cv2.FONT_HERSHEY_SIMPLEX, 
                           0.5, (0, 255, 0), 2)
         
         return frame
